@@ -1,1 +1,341 @@
-<h1>Hola me llamo Víctor</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gimnasio Los Olivos · Villafría</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fondo: #f5f5f1;
+    --superficie: #ffffff;
+    --tinta: #1a1d17;
+    --suave: #62685b;
+    --linea: #e2e3dc;
+    --oliva: #5f7f2a;
+    --oliva-claro: #e8eedb;
+    --sobre-oliva: #ffffff;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fondo: #141612;
+      --superficie: #1c1f19;
+      --tinta: #eef0ea;
+      --suave: #a4ab9b;
+      --linea: #2c3027;
+      --oliva: #9cc256;
+      --oliva-claro: #263019;
+      --sobre-oliva: #141612;
+      color-scheme: dark;
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
+
+  body {
+    background: var(--fondo);
+    color: var(--tinta);
+    font-family: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  img { max-width: 100%; display: block; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--oliva); outline-offset: 3px; border-radius: 4px; }
+
+  h1, h2, h3 {
+    font-family: "Bricolage Grotesque", "DM Sans", system-ui, sans-serif;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  h2 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; margin-bottom: 1rem; }
+  h3 { font-size: 1.3rem; font-weight: 700; }
+
+  .contenedor { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
+  section { padding: 6rem 0; }
+  .intro { color: var(--suave); max-width: 34rem; margin-bottom: 3rem; }
+
+  /* Foto con respaldo si no carga */
+  .foto { background: linear-gradient(135deg, #5f7f2a, #2f3d17); overflow: hidden; }
+  .foto img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* Navegación */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+    padding-top: env(safe-area-inset-top, 0px);
+    transition: background .3s, box-shadow .3s;
+  }
+  .nav .contenedor { display: flex; align-items: center; justify-content: space-between; height: 4.5rem; }
+  .marca { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 1.35rem; color: #fff; text-decoration: none; letter-spacing: -0.02em; }
+  .nav ul { display: flex; gap: 2rem; list-style: none; }
+  .nav ul a { color: rgba(255,255,255,.85); text-decoration: none; font-weight: 500; }
+  .nav ul a:hover { color: #fff; }
+  .nav.solida { background: var(--superficie); box-shadow: 0 1px 0 var(--linea); }
+  .nav.solida .marca, .nav.solida ul a { color: var(--tinta); }
+  .menu-btn { display: none; background: none; border: 0; color: inherit; cursor: pointer; padding: .5rem; }
+  .menu-btn span { display: block; width: 24px; height: 2px; background: #fff; margin: 5px 0; }
+  .nav.solida .menu-btn span { background: var(--tinta); }
+
+  /* Portada */
+  .portada {
+    position: relative; min-height: 100svh; display: flex; align-items: flex-end;
+    color: #fff; padding: 0;
+  }
+  .portada .foto { position: absolute; inset: 0; }
+  .portada::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(15,18,12,.9) 10%, rgba(15,18,12,.35) 60%, rgba(15,18,12,.5));
+  }
+  .portada .contenedor { position: relative; z-index: 1; padding-bottom: 5rem; padding-top: 8rem; width: 100%; }
+  .portada h1 { font-size: clamp(3.25rem, 11vw, 8rem); font-weight: 800; max-width: 12ch; }
+  .portada p { margin-top: 1.5rem; max-width: 32rem; font-size: 1.15rem; color: rgba(255,255,255,.85); }
+  .botones { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2.25rem; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: .9rem 1.6rem; border-radius: 999px; font-weight: 600; text-decoration: none;
+    transition: transform .15s, background .2s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-oliva { background: #9cc256; color: #141612; }
+  .btn-borde { border: 1.5px solid rgba(255,255,255,.6); color: #fff; }
+  .btn-borde:hover { background: rgba(255,255,255,.1); }
+
+  /* Sobre nosotros */
+  .sobre .contenedor { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .sobre .foto { aspect-ratio: 4/5; border-radius: 1.5rem; }
+  .sobre p { color: var(--suave); }
+  .sobre p + p { margin-top: 1rem; }
+  .datos { display: flex; gap: 2.5rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--linea); }
+  .datos strong { display: block; font-family: "Bricolage Grotesque", sans-serif; font-size: 2.25rem; font-weight: 800; color: var(--oliva); line-height: 1; }
+  .datos span { font-size: .95rem; color: var(--suave); }
+
+  /* Clases */
+  .clases { background: var(--superficie); }
+  .rejilla-clases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .clase { border-radius: 1.25rem; overflow: hidden; background: var(--fondo); }
+  .clase .foto { aspect-ratio: 4/3; }
+  .clase .foto img { transition: transform .5s; }
+  .clase:hover .foto img { transform: scale(1.04); }
+  .clase div.texto { padding: 1.25rem 1.5rem 1.5rem; }
+  .clase p { color: var(--suave); font-size: .95rem; margin-top: .35rem; }
+
+  /* Precios */
+  .rejilla-precios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; align-items: stretch; }
+  .plan {
+    background: var(--superficie); border: 1px solid var(--linea); border-radius: 1.5rem;
+    padding: 2rem; display: flex; flex-direction: column;
+  }
+  .plan.destacado { background: var(--oliva); color: var(--sobre-oliva); border-color: var(--oliva); }
+  .plan .precio { font-family: "Bricolage Grotesque", sans-serif; font-size: 3.25rem; font-weight: 800; margin: 1rem 0 .25rem; line-height: 1; }
+  .plan .precio small { font-size: 1rem; font-weight: 500; opacity: .75; }
+  .plan ul { list-style: none; margin-top: 1.5rem; display: grid; gap: .6rem; font-size: .975rem; }
+  .plan li::before { content: "✓"; margin-right: .6rem; font-weight: 700; }
+  .plan .etiqueta { align-self: flex-start; font-size: .85rem; font-weight: 600; padding: .25rem .75rem; border-radius: 999px; background: rgba(255,255,255,.2); margin-bottom: .5rem; }
+  .nota { margin-top: 2rem; color: var(--suave); font-size: .95rem; }
+
+  /* Horario */
+  .horario { background: var(--oliva-claro); }
+  .horario .contenedor { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: start; }
+  .tabla { background: var(--superficie); border-radius: 1.5rem; padding: .5rem 2rem; }
+  .fila { display: flex; justify-content: space-between; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--linea); }
+  .fila:last-child { border-bottom: 0; }
+  .fila span:last-child { font-weight: 600; text-align: right; }
+  .cerrado { color: var(--suave); }
+
+  /* Contacto */
+  .contacto .contenedor { display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.5rem; }
+  .contacto .foto { border-radius: 1.5rem; min-height: 22rem; }
+  .tarjeta-contacto { background: var(--tinta); color: var(--fondo); border-radius: 1.5rem; padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 2rem; }
+  .tarjeta-contacto h2 { color: var(--fondo); }
+  .tarjeta-contacto p { opacity: .75; }
+  .tel { font-family: "Bricolage Grotesque", sans-serif; font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; color: var(--fondo); text-decoration: none; display: block; }
+  .tel:hover { color: var(--oliva); }
+
+  footer { padding: 2.5rem 0 calc(2.5rem + env(safe-area-inset-bottom, 0px)); color: var(--suave); font-size: .9rem; border-top: 1px solid var(--linea); }
+  footer .contenedor { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+
+  /* Entrada de la portada */
+  .portada h1, .portada p, .portada .botones { animation: subir .8s cubic-bezier(.2,.7,.2,1) both; }
+  .portada p { animation-delay: .12s; }
+  .portada .botones { animation-delay: .24s; }
+  @keyframes subir { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+
+  /* Móvil */
+  @media (max-width: 860px) {
+    section { padding: 4.5rem 0; }
+    .sobre .contenedor, .horario .contenedor, .contacto .contenedor { grid-template-columns: 1fr; gap: 2.5rem; }
+    .rejilla-clases, .rejilla-precios { grid-template-columns: 1fr; }
+    .menu-btn { display: block; }
+    .nav ul {
+      display: none; position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; gap: 0; background: var(--superficie); padding: .5rem 1.5rem 1rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,.08);
+    }
+    .nav ul.abierto { display: flex; }
+    .nav ul a { color: var(--tinta); display: block; padding: .75rem 0; }
+    .tabla { padding: .25rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav" aria-label="Principal">
+  <div class="contenedor">
+    <a href="#inicio" class="marca">Los Olivos</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul id="menu">
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#clases">Clases</a></li>
+      <li><a href="#precios">Precios</a></li>
+      <li><a href="#horario">Horario</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="portada" id="inicio">
+  <div class="foto">
+    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1800&q=80" alt="Sala de pesas del gimnasio" onerror="this.remove()">
+  </div>
+  <div class="contenedor">
+    <h1>Entrena en tu pueblo</h1>
+    <p>El gimnasio de Villafría desde 1994. Máquinas nuevas, pesas, clases en grupo y gente que te saluda por tu nombre.</p>
+    <div class="botones">
+      <a href="#contacto" class="btn btn-oliva">Prueba un día gratis</a>
+      <a href="#precios" class="btn btn-borde">Ver precios</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="sobre" id="nosotros">
+    <div class="contenedor">
+      <div class="foto">
+        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=900&q=80" alt="Persona entrenando con mancuernas" onerror="this.remove()">
+      </div>
+      <div>
+        <h2>Un gimnasio de los de siempre, puesto al día</h2>
+        <p>Empezamos con cuatro máquinas en un bajo de la calle Real. Treinta años después tenemos sala de musculación, zona de cardio y un aula para clases, pero seguimos siendo los mismos.</p>
+        <p>Aquí vienen chavales que empiezan, gente que entrena antes de ir al campo y jubilados que no fallan ni un día. Te enseñamos a usar todo sin prisas.</p>
+        <div class="datos">
+          <div><strong>30</strong><span>años abiertos</span></div>
+          <div><strong>350</strong><span>socios</span></div>
+          <div><strong>3</strong><span>clases semanales</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="clases" id="clases">
+    <div class="contenedor">
+      <h2>Clases en grupo</h2>
+      <p class="intro">Todas entran en la cuota. Apúntate en recepción, hay sitio para 12 personas por clase.</p>
+      <div class="rejilla-clases">
+        <article class="clase">
+          <div class="foto"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=800&q=80" alt="Entrenamiento en circuito" onerror="this.remove()"></div>
+          <div class="texto"><h3>Circuito</h3><p>Martes y jueves, 19:30 · con Antonio</p></div>
+        </article>
+        <article class="clase">
+          <div class="foto"><img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=800&q=80" alt="Clase de pilates" onerror="this.remove()"></div>
+          <div class="texto"><h3>Pilates</h3><p>Viernes, 18:00 · con Carmen</p></div>
+        </article>
+        <article class="clase">
+          <div class="foto"><img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=800&q=80" alt="Zona de máquinas" onerror="this.remove()"></div>
+          <div class="texto"><h3>Mantenimiento</h3><p>Lunes y miércoles, 10:00 · con Carmen</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="precios">
+    <div class="contenedor">
+      <h2>Precios claros</h2>
+      <p class="intro">Sin matrícula y sin permanencia. Pagas en recepción, en efectivo o con tarjeta.</p>
+      <div class="rejilla-precios">
+        <div class="plan">
+          <h3>Día suelto</h3>
+          <div class="precio">4 €</div>
+          <ul><li>Acceso a sala y cardio</li><li>Ideal si estás de paso</li></ul>
+        </div>
+        <div class="plan destacado">
+          <span class="etiqueta">El más elegido</span>
+          <h3>Mensual</h3>
+          <div class="precio">25 € <small>/ mes</small></div>
+          <ul><li>Acceso ilimitado</li><li>Todas las clases</li><li>Plan de inicio personalizado</li></ul>
+        </div>
+        <div class="plan">
+          <h3>Estudiantes y jubilados</h3>
+          <div class="precio">18 € <small>/ mes</small></div>
+          <ul><li>Lo mismo que el mensual</li><li>Trae tu carné</li></ul>
+        </div>
+      </div>
+      <p class="nota">También hay trimestre por 65 €.</p>
+    </div>
+  </section>
+
+  <section class="horario" id="horario">
+    <div class="contenedor">
+      <div>
+        <h2>Horario</h2>
+        <p class="intro">En agosto abrimos solo por las mañanas. Lo avisamos con tiempo en la puerta y en el grupo de WhatsApp.</p>
+      </div>
+      <div class="tabla">
+        <div class="fila"><span>Lunes a viernes</span><span>7:00 – 14:00<br>16:30 – 22:00</span></div>
+        <div class="fila"><span>Sábados</span><span>9:00 – 13:00</span></div>
+        <div class="fila"><span>Domingos y festivos</span><span class="cerrado">Cerrado</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contacto" id="contacto">
+    <div class="contenedor">
+      <div class="foto">
+        <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=1200&q=80" alt="Entrenamiento con pesas" onerror="this.remove()">
+      </div>
+      <div class="tarjeta-contacto">
+        <div>
+          <h2>Ven a probar</h2>
+          <p>Calle Real, 14, al lado del ayuntamiento. Villafría.</p>
+        </div>
+        <div>
+          <p>Llámanos o pásate sin avisar</p>
+          <a class="tel" href="tel:+34958000000">958 000 000</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="contenedor">
+    <span>© 2026 Gimnasio Los Olivos</span>
+    <span>Calle Real, 14 · Villafría</span>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  const menu = document.getElementById('menu');
+  const btn = document.getElementById('menuBtn');
+  const actualizar = () => nav.classList.toggle('solida', window.scrollY > 40 || menu.classList.contains('abierto'));
+  window.addEventListener('scroll', actualizar, { passive: true });
+  btn.addEventListener('click', () => {
+    const abierto = menu.classList.toggle('abierto');
+    btn.setAttribute('aria-expanded', abierto);
+    actualizar();
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menu.classList.remove('abierto');
+    btn.setAttribute('aria-expanded', false);
+    actualizar();
+  }));
+  actualizar();
+</script>
+</body>
+</html>
